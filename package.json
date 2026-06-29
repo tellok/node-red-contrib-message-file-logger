@@ -1,0 +1,20 @@
+{
+  "name": "node-red-contrib-message-file-logger",
+  "version": "0.2.0",
+  "description": "Node-RED runtime plugin that logs node input/output messages to hourly rotated text files.",
+  "private": true,
+  "keywords": [
+    "node-red",
+    "node-red-plugin",
+    "logging"
+  ],
+  "license": "UNLICENSED",
+  "node-red": {
+    "plugins": {
+      "message-file-logger": "message-file-logger.js"
+    }
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
