@@ -2,6 +2,10 @@
 
 [简体中文](README.zh-CN.md) | [繁體中文](README.zh-TW.md) | [English](README.md) | [日本語](README.ja.md) | [한국어](README.ko.md)
 
+## 目的
+
+このプラグインは Node-RED フローの挙動を診断するためのものです。ノード単位のメッセージ移動、処理完了、エラー、ステータス変更、簡潔なノード設定コンテキストを、1 時間ごとにローテーションされる JSONL ファイルへ記録します。これにより、各所に debug ノードを追加しなくても、発生後のフロー不具合を追跡できます。
+
 これは Node-RED の runtime plugin です。新しいノードタイプは登録せず、エディタのパレットにも表示されません。
 
 Node-RED Messaging Hooks を使って次のイベントを記録します。

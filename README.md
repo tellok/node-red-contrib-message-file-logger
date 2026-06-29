@@ -2,6 +2,10 @@
 
 [简体中文](README.zh-CN.md) | [繁體中文](README.zh-TW.md) | [English](README.md) | [日本語](README.ja.md) | [한국어](README.ko.md)
 
+## Goal
+
+This plugin is built for diagnosing Node-RED flow behavior. It records node-level message movement, completion, errors, status changes, and compact node configuration context to hourly rotated JSONL files, so a flow bug can be traced after it happens without adding debug nodes everywhere.
+
 This is a Node-RED runtime plugin. It does not register any new node types.
 
 It uses Node-RED Messaging Hooks to log:

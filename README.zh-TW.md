@@ -2,6 +2,10 @@
 
 [简体中文](README.zh-CN.md) | [繁體中文](README.zh-TW.md) | [English](README.md) | [日本語](README.ja.md) | [한국어](README.ko.md)
 
+## 目標
+
+這個外掛用於診斷 Node-RED 流程行為。它會把節點層級的訊息流轉、處理完成、錯誤、狀態變化和簡要節點設定上下文寫入按小時輪替的 JSONL 檔案，方便在問題發生後追蹤流程 bug，而不需要到處加入 debug 節點。
+
 這是一個 Node-RED runtime plugin，不會註冊任何新的節點類型，也不會出現在左側節點面板。
 
 它透過 Node-RED Messaging Hooks 記錄：

@@ -2,6 +2,10 @@
 
 [简体中文](README.zh-CN.md) | [繁體中文](README.zh-TW.md) | [English](README.md) | [日本語](README.ja.md) | [한국어](README.ko.md)
 
+## 목표
+
+이 플러그인은 Node-RED 플로우 동작을 진단하기 위한 도구입니다. 노드 단위의 메시지 이동, 처리 완료, 오류, 상태 변경, 간단한 노드 설정 컨텍스트를 시간 단위로 회전되는 JSONL 파일에 기록하므로, 곳곳에 debug 노드를 추가하지 않아도 문제가 발생한 뒤 플로우 버그를 추적할 수 있습니다.
+
 이 패키지는 Node-RED runtime plugin입니다. 새 노드 타입을 등록하지 않으며 에디터 팔레트에도 표시되지 않습니다.
 
 Node-RED Messaging Hooks를 사용해 다음 이벤트를 기록합니다.

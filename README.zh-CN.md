@@ -2,6 +2,10 @@
 
 [简体中文](README.zh-CN.md) | [繁體中文](README.zh-TW.md) | [English](README.md) | [日本語](README.ja.md) | [한국어](README.ko.md)
 
+## 目标
+
+这个插件用于诊断 Node-RED 流程行为。它把节点级消息流转、处理完成、错误、状态变化和简要节点配置上下文写入按小时轮转的 JSONL 文件，方便在问题发生后追踪流程 bug，而不需要到处添加 debug 节点。
+
 这是一个 Node-RED runtime plugin，不会注册任何新的节点类型，也不会出现在左侧节点面板里。
 
 它通过 Node-RED Messaging Hooks 记录：
