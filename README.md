@@ -1,5 +1,7 @@
 # Node-RED Message File Logger
 
+[简体中文](README.zh-CN.md) | [繁體中文](README.zh-TW.md) | [English](README.md) | [日本語](README.ja.md) | [한국어](README.ko.md)
+
 This is a Node-RED runtime plugin. It does not register any new node types.
 
 It uses Node-RED Messaging Hooks to log:
@@ -39,14 +41,16 @@ Example line:
 
 ## Install
 
-Copy this folder into the Node-RED add-on's user directory, then install it locally:
+Install from npm or from a local tarball/folder:
 
 ```bash
-cd /config/node-red
-npm install ./nodered-message-file-logger
+cd ~/.node-red
+npm install node-red-contrib-message-file-logger
 ```
 
 Restart Node-RED after installation.
+
+For the Home Assistant community Node-RED add-on, the Node-RED user directory is usually the add-on's `/config`, not Home Assistant Core's `/config`.
 
 ## Configure
 
