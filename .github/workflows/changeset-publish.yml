@@ -1,0 +1,83 @@
+name: Changeset Release
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'package.json'
+
+jobs:
+  check-version:
+    runs-on: ubuntu-latest
+    outputs:
+      version-changed: ${{ steps.check-version.outputs.changed }}
+      new-version: ${{ steps.check-version.outputs.version }}
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: Check if version changed
+        id: check-version
+        run: |
+          CURRENT_VERSION=$(node -p "require('./package.json').version")
+          echo "Current version: $CURRENT_VERSION"
+
+          if PREV_CONTENT=$(git show HEAD~1:package.json 2>/dev/null); then
+            PREVIOUS_VERSION=$(echo "$PREV_CONTENT" | node -e "const fs = require('fs'); const data = fs.readFileSync(0, 'utf8'); console.log(JSON.parse(data).version)")
+            echo "Previous version: $PREVIOUS_VERSION"
+          else
+            echo "First commit, no previous version"
+            PREVIOUS_VERSION="0.0.0"
+          fi
+
+          if [ "$CURRENT_VERSION" != "$PREVIOUS_VERSION" ]; then
+            echo "Version changed from $PREVIOUS_VERSION to $CURRENT_VERSION"
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+            echo "version=$CURRENT_VERSION" >> "$GITHUB_OUTPUT"
+          else
+            echo "Version unchanged"
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+            echo "version=$CURRENT_VERSION" >> "$GITHUB_OUTPUT"
+          fi
+
+  publish:
+    needs: check-version
+    if: needs.check-version.outputs.version-changed == 'true'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      id-token: write
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22.14.0'
+          registry-url: https://registry.npmjs.org
+          cache: npm
+
+      - name: Setup npm with trusted publishing support
+        run: npm install -g npm@11.5.1
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Check npm package
+        run: npm run pack:check
+
+      - name: Publish to npm
+        run: npm run release
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: v${{ needs.check-version.outputs.new-version }}
+          name: v${{ needs.check-version.outputs.new-version }}
+          generate_release_notes: true
